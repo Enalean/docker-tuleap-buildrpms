@@ -1,4 +1,4 @@
-FROM centos:centos6
+FROM centos:centos5
 
 MAINTAINER Martin GOYOT <martin.goyot@enalean.com>
 
