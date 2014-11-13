@@ -1,4 +1,4 @@
-FROM cbayle/centos6
+FROM centos:centos6
 
 MAINTAINER Martin GOYOT <martin.goyot@enalean.com>
 
