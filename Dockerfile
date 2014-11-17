@@ -7,7 +7,6 @@ ADD run.sh /run.sh
 # Symlinks is needed by zendframeworks
 RUN yum install -y \
     rpm-build \
-    createrepo \
     tar \
     zip \
     make \

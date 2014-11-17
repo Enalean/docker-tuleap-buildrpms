@@ -29,4 +29,3 @@ fi
 
 mkdir -p $TMP_BUILD $TMP_BUILD/BUILD $TMP_BUILD/RPMS $TMP_BUILD/SOURCES $TMP_BUILD/SPECS $TMP_BUILD/SRPMS $TMP_BUILD/TMP
 rpmbuild --define "_topdir $TMP_BUILD" --define "php_base $php" --rebuild $RPM_PATH/$folder/*.src.rpm;
-cd $TMP_BUILD/RPMS ; createrepo .
