@@ -30,6 +30,17 @@ fi
 mkdir -p $TMP_BUILD $TMP_BUILD/BUILD $TMP_BUILD/RPMS $TMP_BUILD/SOURCES $TMP_BUILD/SPECS $TMP_BUILD/SRPMS $TMP_BUILD/TMP
 find $RPM_PATH/$folder -name '*.src.rpm' | while read srpm
 do
-	/usr/bin/yum-builddep -y --nogpgcheck $srpm
-	rpmbuild --define "_topdir $TMP_BUILD" --define "php_base $php" --rebuild $srpm
+	pkgname=$(basename $srpm | sed 's/\(.[^0-9]*\)-.*/\1/')
+	if ! ls $TMP_BUILD/RPMS/*/$pkgname-[0-9]*.rpm  2>/dev/null
+	then
+		echo "                |"
+		echo "                ----- Building $pkgname -----"
+		echo ""
+		/usr/bin/yum-builddep -y --nogpgcheck $srpm
+		rpmbuild --define "_topdir $TMP_BUILD" --define "php_base $php" --rebuild $srpm
+	else
+		echo "                |"
+		echo "                +-> $pkgname already built"
+		echo ""
+	fi
 done
