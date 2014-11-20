@@ -6,13 +6,17 @@ ADD run.sh /run.sh
 
 # Symlinks is needed by zendframeworks
 RUN yum install -y \
-    rpm-build \
+    epel-release \
     tar \
     zip \
     make \
     libxslt \
-    symlinks \
-    && yum clean all \
-    ; chmod u+x /run.sh
+    && \
+    yum install -y \
+    fedora-packager \
+    && \
+    yum clean all ;\
+    chmod u+x /run.sh ;\
+    useradd makerpm -G mock 
 
-ENTRYPOINT ["/run.sh"]
+#ENTRYPOINT ["/run.sh"]
