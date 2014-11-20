@@ -4,12 +4,14 @@ MAINTAINER Martin GOYOT <martin.goyot@enalean.com>
 
 # Symlinks is needed by zendframeworks
 # I have to reinstall glibc because of a problem with iconv
+# Temporary add gcc for missing build dep in mailman-tuleap
 RUN yum install -y \
     epel-release \
     tar \
     zip \
     make \
     libxslt \
+    gcc \
     && \
     yum install -y \
     fedora-packager \
