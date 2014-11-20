@@ -28,4 +28,8 @@ if [ -z "$folder" ] || [ -z "$php" ]; then
 fi
 
 mkdir -p $TMP_BUILD $TMP_BUILD/BUILD $TMP_BUILD/RPMS $TMP_BUILD/SOURCES $TMP_BUILD/SPECS $TMP_BUILD/SRPMS $TMP_BUILD/TMP
-rpmbuild --define "_topdir $TMP_BUILD" --define "php_base $php" --rebuild $RPM_PATH/$folder/*.src.rpm;
+find $RPM_PATH/$folder -name '*.src.rpm' | while read srpm
+do
+	/usr/bin/yum-builddep -y --nogpgcheck $srpm
+	rpmbuild --define "_topdir $TMP_BUILD" --define "php_base $php" --rebuild $srpm
+done
