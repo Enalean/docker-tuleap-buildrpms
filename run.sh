@@ -36,8 +36,13 @@ do
 		echo "                |"
 		echo "                ----- Building $pkgname -----"
 		echo ""
-		/usr/bin/yum-builddep -y --nogpgcheck $srpm
-		rpmbuild --define "_topdir $TMP_BUILD" --define "php_base $php" --rebuild $srpm
+		if [ -x /tuleap/${pkgname}.build.sh ] 
+		then
+			/tuleap/${pkgname}.build.sh $TMP_BUILD $srpm $php
+		else
+			/usr/bin/yum-builddep -y --nogpgcheck $srpm
+			rpmbuild --define "_topdir $TMP_BUILD" --define "php_base $php" --rebuild $srpm
+		fi
 	else
 		echo "                |"
 		echo "                +-> $pkgname already built"
