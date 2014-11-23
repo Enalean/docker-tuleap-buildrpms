@@ -11,11 +11,3 @@ run:
 		-v $$(dirname $(CURDIR))/rpms:/tmp/build \
 		cbayle/docker-tuleap-buildrpms:1.0 $(CMD)
 
-runlibs:
-	docker run --rm=true -t -i \
-		--privileged=true \
-		-v $$(dirname $(CURDIR))/tuleap:/tuleap \
-		-v $$(dirname $(CURDIR))/srpms-libs/:/srpms/ \
-		-v $$(dirname $(CURDIR))/rpms-libs:/tmp/build \
-		cbayle/docker-tuleap-buildrpms:1.0 $(CMD)
-
