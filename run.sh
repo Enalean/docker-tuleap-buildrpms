@@ -49,3 +49,9 @@ do
 		echo ""
 	fi
 done
+
+if [ ! -z "$UID" -a ! -z "$GID" ]
+then
+	echo "======== make /tmp/build owned by $UID.$GID ======="
+	chown -R $UID.$GID /tmp/build
+fi
