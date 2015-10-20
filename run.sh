@@ -2,7 +2,7 @@
 
 BASE_PATH="/tuleap";
 RPM_PATH="/srpms";
-TMP_BUILD="/tmp/build";
+TMP_BUILD="/rpms";
 
 options=`getopt -o h -l folder:,php: -- "$@"`
 
