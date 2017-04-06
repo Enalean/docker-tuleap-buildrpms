@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 BASE_PATH="/tuleap";
 RPM_PATH="/srpms";
 TMP_BUILD="/rpms";
