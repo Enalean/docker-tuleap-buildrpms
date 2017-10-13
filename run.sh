@@ -1,20 +1,18 @@
 #!/bin/bash
 
-BASE_PATH="/tuleap";
-RPM_PATH="/srpms";
-TMP_BUILD="/rpms";
+set -e
 
-options=`getopt -o h -l folder:,php: -- "$@"`
+TULEAP_SOURCES="/tuleap"
+RPM_BUILD="/rpms"
+
+options=`getopt -o h -l os: -- "$@"`
 
 eval set -- "$options"
 while true
 do
     case "$1" in
-    --folder)
-        folder=$2;
-        shift 2;;
-    --php)
-        php=$2;
+    --os)
+        os=$2;
         shift 2;;
     --)
         shift 1; break ;;
@@ -23,9 +21,10 @@ do
     esac
 done
 
-if [ -z "$folder" ] || [ -z "$php" ]; then
-    echo "You must specify --folder and --php arguments";
+if [ -z "$os" ]; then
+    echo "You must specify --os argument";
 fi
 
-mkdir -p $TMP_BUILD $TMP_BUILD/BUILD $TMP_BUILD/RPMS $TMP_BUILD/SOURCES $TMP_BUILD/SPECS $TMP_BUILD/SRPMS $TMP_BUILD/TMP
-rpmbuild --define "_topdir $TMP_BUILD" --define "php_base $php" --rebuild $RPM_PATH/$folder/*.src.rpm;
+mkdir -p "$RPM_BUILD/"{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+cp "$TULEAP_SOURCES/"*tar.gz "$RPM_BUILD/SOURCES/"
+OS="$os" make -C "$TULEAP_SOURCES/tools/rpm" rpm RPM_TMP="$RPM_BUILD"

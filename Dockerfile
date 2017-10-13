@@ -1,18 +1,14 @@
-FROM centos:centos6
-
-MAINTAINER Martin GOYOT <martin.goyot@enalean.com>
+FROM centos:6
 
 RUN yum install -y rpm-build \
     tar \
-    util-linux &&\
+    util-linux \
+    zip \
+    libxslt \
+    make &&\
     yum clean all
 
-RUN yum install -y zip
-RUN yum install -y make
-RUN yum install -y libxslt
-
-ADD run.sh /run.sh
-RUN chmod u+x /run.sh
+COPY run.sh /run.sh
 
 VOLUME ["/rpms"]
 
